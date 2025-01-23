@@ -6,6 +6,10 @@ module CypressRails
     def call(host:, port:, transactional_server:)
       configure_rails_to_run_our_state_reset_on_every_request!(transactional_server)
       app = create_rack_app
+      # puts "Starting Rabbitmq"
+      # system("brew services start rabbitmq")
+      # puts "Starting Rails Sneakers workers..."
+      # system("RAILS_ENV=test bundle exec rails sneakers:active_job > test_workers.txt 2>&1 &")
       Server.new(app, host: host, port: port).tap do |server|
         server.boot
       end

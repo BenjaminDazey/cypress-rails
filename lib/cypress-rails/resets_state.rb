@@ -14,6 +14,7 @@ module CypressRails
         @manages_transactions.rollback_transaction
         @manages_transactions.begin_transaction
       end
+      # system('rabbitmqctl list_queues | cut -f1 | xargs -I {} rabbitmqctl purge_queue {}')
       @initializer_hooks.run(:after_state_reset)
     end
   end
